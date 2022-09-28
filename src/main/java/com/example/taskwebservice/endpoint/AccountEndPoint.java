@@ -15,11 +15,11 @@ public class AccountEndPoint {
 
 @PayloadRoot(namespace = "http://uws.provider.com/", localPart = "GetInformationArguments")
 @ResponsePayload
-public GetInformationResult getInformationResult(@RequestPayload GetInformationArguments arguments){
+public JAXBElement<GetInformationResult> getInformationResult(@RequestPayload JAXBElement<GetInformationArguments> arguments){
 
     GetInformationResult response = new GetInformationResult();
     response.getParameters().add(new GenericParam());
-    return response;
+    return null;
 }
 
 }
