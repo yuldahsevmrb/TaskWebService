@@ -20,12 +20,13 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     public ClientRepository clientRepository;
 
+
+
     @Override
     public GetInformationResult getClient(JAXBElement<GetInformationArguments> arguments) {
         GetInformationResult result = new GetInformationResult();
-        for (GenericParam param: arguments.getValue().getParameters()) {
-                    if(param.getParamKey().equalsIgnoreCase("client_id")){
-                        Optional<Client> client = clientRepository.findById(Long.parseLong(param.getParamValue()));
+        String client_id = Utils.getValueByKey(arguments.getValue().getParameters(), "client_id");
+                        Optional<Client> client = getClient(client_id);
                         if(client.isPresent()){
                             Client client1 = client.get();
                             GenericParam resultParam = new GenericParam();
@@ -42,8 +43,12 @@ public class ClientServiceImpl implements ClientService {
                             result.setStatus(1);
                             result.setErrorMsg("NOT data found");
                         }
-                    }
-        }
         return result;
     }
+
+    @Override
+    public Optional<Client> getClient(String clientId) {
+        return clientRepository.findById(Long.parseLong(clientId));
+    }
+
 }

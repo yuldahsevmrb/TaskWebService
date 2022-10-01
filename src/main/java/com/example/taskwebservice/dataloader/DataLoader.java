@@ -27,7 +27,7 @@ public class DataLoader implements ApplicationRunner {
         Client client = new Client();
 
         account.setActive(true);
-        account.setBalance(BigDecimal.valueOf(100000));
+        account.setBalance(BigDecimal.valueOf(10000));
         account.setNumber("12345678901234567891");
 
         client.setName("Test client name");
